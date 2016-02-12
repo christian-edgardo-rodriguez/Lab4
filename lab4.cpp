@@ -5,22 +5,12 @@ using std::cin;
 using std::endl;
 
 int***newArray();
+void deletePunteros(int***,int);
 
 int main(int argc, char const *argv[]){
 	int size=12;
 	int***arreglo=newArray();
-	for (int i = 0; i < size; ++i)
-	{
-		for (int j = 0; j < size; ++j)
-		{
-			delete[] arreglo[i][j];
-		}
-	}
-	for (int i = 0; i < size; ++i)
-	{
-		delete[] arreglo[i];
-	}
-	delete[] arreglo;//fin delete
+	deletePunteros(arreglo,size);
 	return 0;
 }
 int***newArray(){
@@ -35,4 +25,19 @@ int***newArray(){
 		}
 	}//fin new
 	return arreglo;
+}
+void deletePunteros(int*** arreglo, int size){
+	for (int i = 0; i < size; ++i)
+	{
+		for (int j = 0; j < size; ++j)
+		{
+			delete[] arreglo[i][j];
+		}
+	}
+	for (int i = 0; i < size; ++i)
+	{
+		cout << "delete";
+		delete[] arreglo[i];
+	}
+	delete[] arreglo;//fin delete
 }
