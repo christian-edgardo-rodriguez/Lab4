@@ -12,13 +12,16 @@ void randomLlenar1(int***, int, int);
 void randomLlenar2(int***, int, int);
 void imprimirMatriz(int***, int);
 int menu(int, int);
+void expansiveATK(int*** , int, int , int , int&);
 
 int main(int argc, char const *argv[]){
 	srand(time(NULL));
 	int x1,y1,z1,x2,y2, z2;
+	bool validarEXP = true;
 	int size=12, bandera=1;
 	int cantCoor = 15, wave1=3, expansive1=3, wave2=3, expansive2=3, cantJUG1 = 14, cantJUG2 = 14;
 	bool win=false;
+
 	int***arregloJug1=newArray();
 	int***arregloJug2=newArray();
 	randomLlenar1(arregloJug1, size, cantCoor);
@@ -113,7 +116,31 @@ int main(int argc, char const *argv[]){
 				}
 			}else if (opcion1 == 5){
 				while(expansive1!=0){
-
+					while(validarEXP){
+					cout << "expansive Attack" << endl;
+					cout << "coord x: " <<endl;
+					cin >> x1;
+					cout << "coord y: " <<endl;
+					cin >> y1;
+					cout << "coord z: " <<endl;
+					cin >> z1;
+					if (x1 ==0 || x1 == 11){
+				    	cout << "las coord x no puede ser 0 o 11 !!!";
+				    	validarEXP = true;
+					}else if (y1 == 0 || y1 == 11){
+				    	cout << "las coord y no puede ser 0 o 11 !!!";
+				    	validarEXP = true;
+					}else if (z1 ==0 || z1 == 11){
+				    	cout << "las coord z no puede ser 0 o 11 !!!";
+				    	validarEXP = true;
+					}else{
+						validarEXP = false;
+					}
+				}
+				expansive1--;
+				expansiveATK(arregloJug2,x1,y1,z1, cantJUG2);
+				validarEXP = true;
+				break;
 				}
 				if (expansive1==0){
 					cout<<"Ya no tiene mas expansives."<<endl;
@@ -217,7 +244,32 @@ int main(int argc, char const *argv[]){
 				}
 			}else if (opcion2 == 5){
 				while(expansive2!=0){
-
+					cout << "expansive Attack" << endl;
+				    while(validarEXP){
+					cout << "expansive Attack" << endl;
+					cout << "coord x: " <<endl;
+					cin >> x2;
+					cout << "coord y: " <<endl;
+					cin >> y2;
+					cout << "coord z: " <<endl;
+					cin >> z2;
+					if (x2 ==0 || x2 == 11){
+				    	cout << "las coord x no puede ser 0 o 11 !!!";
+				    	validarEXP = true;
+					}else if (y2 == 0 || y2 == 11){
+				    	cout << "las coord y no puede ser 0 o 11 !!!";
+				    	validarEXP = true;
+					}else if (z2 ==0 || z2 == 11){
+				    	cout << "las coord z no puede ser 0 o 11 !!!";
+				    	validarEXP = true;
+					}else{
+						validarEXP = false;
+					}
+				}
+				expansive2--;
+				expansiveATK(arregloJug1,x2,y2,z2,cantJUG1);
+				validarEXP = true;
+				break;
 				}
 				if (expansive2==0){
 					cout<<"Ya no tiene mas expansives."<<endl;
@@ -341,4 +393,20 @@ int menu(int wave, int expansive){
 	cout<<"Ingrese su opcion: ";
 	cin>>opcion;
 	return opcion;
+}
+
+void expansiveATK(int*** array, int coordx, int coordy, int coordz,int &cantEnem){
+	for (int i = coordx - 1; i < coordx + 2; ++i){
+		for (int j = coordy - 1; j < coordy + 2; ++j){
+			for (int k = coordz - 1; k < coordz + 2; ++k){
+				if (array[i][j][k] == 1){
+					cout <<"("<< i<<","<<j<<","<<k<<")" << "SUBMARINO DESTRUIDO!!! so crack much impresive wow!!!" << endl;
+					cantEnem--;
+					array[i][j][k] == 0;
+				}else{
+					cout << "NO HAY SUBMARINO PARA DESTRUIR -_-" << endl;
+				}
+			}
+		}
+	}
 }
