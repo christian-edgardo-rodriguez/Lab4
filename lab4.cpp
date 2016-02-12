@@ -1,4 +1,3 @@
-#include <iostream>
 #include <cstdlib>
 #include <ctime>
 
@@ -16,7 +15,7 @@ int menu(int, int);
 int main(int argc, char const *argv[]){
 	srand(time(NULL));
 	int size=12, bandera=1;
-	int cantCoor = 15, wave1=3, expansive1=3, wave2=3, expansive2=3;
+	int cantCoor = 15, wave1=3, expansive1=3, wave2=3, expansive2=3, cantJUG1 = 14, cantJUG2 = 14;
 	bool win=false;
 	int***arregloJug1=newArray();
 	int***arregloJug2=newArray();
@@ -27,13 +26,51 @@ int main(int argc, char const *argv[]){
 			cout<<"---------------MAPA DE SUBMARINOS DEL JUGADOR 1-----------------"<<endl;
 			imprimirMatriz(arregloJug1, size);
 			cout<<"-----------MAPA DE ATAQUES-------------"<<endl;
+			cout << "NUMERO DE SUBMARINOS ENEMIGOS" << cantJUG2 << endl;
 			int opcion1=menu(wave1, expansive1);
+			if (opcion1 == 1){
+				cout << "Ataque1" << endl;
+			}else if (opcion1 == 2){
+				cout << "Wave Attack XY" << endl;
+			}else if (opcion1 == 3){
+				cout << "wave Attack ZY" << endl;
+			}else if(opcion1 == 4){
+				cout << "wave Attack ZX" << endl;
+			}else if (opcion1 == 5){
+				cout << "expansive Attack" << endl;
+			}else{
+				cout <<"No es una opcion -_-!!!" << endl;
+			}
+			if (cantJUG2==0){
+				cout << "Ganastes!!!" << endl;
+				win = true;
+				break;
+			}
 			bandera=2;
 		}else if(bandera==2){
 			cout<<"---------------MAPA DE SUBMARINOS DEL JUGADOR 2-----------------"<<endl;
 			imprimirMatriz(arregloJug2, size);
 			cout<<"-----------MAPA DE ATAQUES-------------"<<endl;
+			cout << "NUMERO DE SUBMARINOS ENEMIGOS" << cantJUG2 << endl;
 			int opcion2=menu(wave2, expansive2);
+			if (opcion2 == 1){
+				cout << "Ataque1" << endl;
+			}else if (opcion2 == 2){
+				cout << "Wave Attack XY" << endl;
+			}else if (opcion2 == 3){
+				cout << "wave Attack ZY" << endl;
+			}else if(opcion2 == 4){
+				cout << "wave Attack ZX" << endl;
+			}else if (opcion2 == 5){
+				cout << "expansive Attack" << endl;
+			}else{
+				cout <<"No es una opcion -_-!!!" << endl;
+			}
+			if (cantJUG1==0){
+				cout << "Ganastes!!!" << endl;
+				win = true;
+				break;
+			}
 			bandera=1;
 		}
 	}while(win==false);
