@@ -48,6 +48,7 @@ void deletePunteros(int*** arreglo, int size){
 }
 void randomLlenar(int*** array, int size, int cantCoor){
 	srand(time(NULL));
+	bool validCoor=true;
 	for (int i = 0; i < size; ++i){
 		for (int j = 0; j < size; ++j){
 				for (int k = 0; k < size; ++k){
@@ -56,9 +57,17 @@ void randomLlenar(int*** array, int size, int cantCoor){
 			}	
 	}
 	for (int i = 0; i < cantCoor; ++i){
-		int coordX=rand()%11;
-		int coordY=rand()%11;
-		int coordZ=rand()%11;
-		array[coordX][coordY][coordZ] = 1;
+		while(validCoor){
+			int coordX=rand()%12;
+			int coordY=rand()%12;
+			int coordZ=rand()%12;
+			if (array[coordX][coordY][coordZ] == 1){
+				validCoor = true;
+			}else{
+				array[coordX][coordY][coordZ] = 1;
+				validCoor = false;
+			}
+	    }
+	    validCoor= true;
 	}
 }

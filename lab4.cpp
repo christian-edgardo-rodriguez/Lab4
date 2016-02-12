@@ -62,10 +62,18 @@ void randomLlenar(int*** array, int size, int cantCoor){
 			}	
 	}
 	for (int i = 0; i < cantCoor; ++i){
-		int coordX=rand()%12;
-		int coordY=rand()%12;
-		int coordZ=rand()%12;
-		array[coordX][coordY][coordZ] = 1;
+		while(validCoor){
+			int coordX=rand()%12;
+			int coordY=rand()%12;
+			int coordZ=rand()%12;
+			if (array[coordX][coordY][coordZ] == 1){
+				validCoor = true;
+			}else{
+				array[coordX][coordY][coordZ] = 1;
+				validCoor = false;
+			}
+	    }
+	    validCoor= true;
 	}
 }
 void imprimirMatriz(int*** array, int size){
