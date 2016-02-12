@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 using std::cout;
 using std::cin;
@@ -6,11 +8,15 @@ using std::endl;
 
 int***newArray();
 void deletePunteros(int***,int);
+void randomLlenar(int***, int);
 
 int main(int argc, char const *argv[]){
 	int size=12;
-	int***arreglo=newArray();
-	deletePunteros(arreglo,size);
+	int***arregloJug1=newArray();
+	int***arregloJug2=newArray();
+
+	deletePunteros(arregloJug1, size);
+	deletePunteros(arregloJug2 ,size);
 	return 0;
 }
 int***newArray(){
@@ -36,8 +42,17 @@ void deletePunteros(int*** arreglo, int size){
 	}
 	for (int i = 0; i < size; ++i)
 	{
-		cout << "delete";
 		delete[] arreglo[i];
 	}
 	delete[] arreglo;//fin delete
+}
+void randomLlenar(int*** array[], int size){
+	srand(time(NULL));
+	for (int i = 0; i < size; ++i){
+		for (int j = 0; j < size; ++j){
+				for (int k = 0; k < size; ++k){
+						arreglo[i][j][k]=0;
+					}	
+			}	
+	}
 }
